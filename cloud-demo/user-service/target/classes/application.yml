@@ -6,13 +6,13 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.jdbc.Driver
-  application: # user服务的服务名称
-    name: userservice
-  cloud:
-    nacos:
-      server-addr: localhost:8848 # nacos服务端地址
-      discovery:
-        cluster-name: SH # 集群名称，这里SH代指上海，主要用于区分启动不同集群的实例
+#  application: # user服务的服务名称
+#    name: userservice
+#  cloud:
+#    nacos:
+#      server-addr: localhost:8848 # nacos服务端地址
+#      discovery:
+#        cluster-name: SH # 集群名称，这里SH代指上海，主要用于区分启动不同集群的实例
 #        cluster-name: HZ # 集群名称，这里HZ代指杭州
 mybatis:
   type-aliases-package: cn.itcast.user.pojo
@@ -28,3 +28,5 @@ logging:
 #  client: # eureka的地址信息
 #    service-url:
 #      defaultZone: http://localhost:10086/eureka
+pattern:
+  name: 本地环境local
