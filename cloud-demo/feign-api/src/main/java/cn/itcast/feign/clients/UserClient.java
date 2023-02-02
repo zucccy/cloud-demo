@@ -1,7 +1,6 @@
-package cn.itcast.order.clients;
+package cn.itcast.feign.clients;
 
-import cn.itcast.order.config.DefaultFeignConfiguration;
-import cn.itcast.order.pojo.User;
+import cn.itcast.feign.pojo.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
