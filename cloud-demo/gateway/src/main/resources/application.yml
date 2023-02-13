@@ -1,0 +1,39 @@
+server:
+  port: 10010 # 网关端口
+spring:
+  application:
+    name: gateway # 服务名称
+  cloud:
+    nacos:
+      server-addr: localhost:8848 # 服务端地址
+    gateway:
+      routes:
+        - id: user-service # 路由id，唯一，这里是user服务的路由
+          uri: lb://userservice # 路由目标地址，lb就是负载均衡的意思，后面接服务名称
+          predicates: # 路由断言，判断请求是否符合路由规则的条件
+            - Path=/user/** # 按照路径匹配，只要以/user/开头就符合要求
+#          filters: # 过滤器
+#            - AddRequestHeader=Truth, itcast is freaking awesome! # 添加请求头参数Truth，内容为itcast is freaking awesome!
+        - id: order-service # 路由id，唯一，这里是order服务的路由
+          uri: lb://orderservice
+          predicates:
+            - Path=/order/** # 按照路径匹配，只要以/order/开头就符合要求
+            - Before=2031-04-13T15:14:47.433+08:00[Asia/Shanghai]
+      default-filters:
+        - AddRequestHeader=Truth, itcast is freaking awesome!
+      globalcors: # 全局的跨域处理
+        add-to-simple-url-handler-mapping: true # 解决options请求被拦截问题
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: # 允许哪些网站的跨域请求
+              - "http://localhost:8090"
+              - "http://www.leyou.com"
+            allowedMethods: # 允许的跨域ajax的请求方式
+              - "GET"
+              - "POST"
+              - "DELETE"
+              - "PUT"
+              - "OPTIONS"
+            allowedHeaders: "*" # 允许在请求中携带的头信息
+            allowCredentials: true # 是否允许携带cookie
+            maxAge: 360000 # 这次跨域检测的有效期
